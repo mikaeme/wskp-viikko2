@@ -18,9 +18,24 @@
     <input class="light-border" type="password" name="passwd" placeholder="Password" required>
     <button class="light-border" type="submit">Save</button>
   </form>
+  <h3>Add cat</h3>
   <form action="http://localhost:3000/cat" method="post" enctype="multipart/form-data" class="light-border">
+    <input class="light-border" type="text" name="name" placeholder="Name" required>
+    <input class="light-border" type="text" name="age" placeholder="age" required>
+    <input class="light-border" type="text" name="weight" placeholder="weight" required>
+    <input class="light-border" type="text" name="owner" placeholder="owner" required>
     <input class="light-border" type="file" name="cat">
     <button class="light-border" type="submit">save</button>
+  </form>
+  <h3>Edit cat</h3>
+  <form action="http://localhost:3000/cat" method="post" enctype="multipart/form-data" class="light-border">
+    <input class="light-border" type="text" name="name" placeholder="Name" required>
+    <input class="light-border" type="text" name="age" placeholder="age" required>
+    <input class="light-border" type="text" name="weight" placeholder="weight" required>
+    <input class="light-border" type="text" name="owner" placeholder="owner" required>
+    <input class="light-border" type="text" name="id" placeholder="id" required>
+    <button class="light-border" type="submit">edit</button>
+  </form>
 </div>
 <script src="./js/main.js"></script>
 </body>
