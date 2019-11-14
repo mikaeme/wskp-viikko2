@@ -1,5 +1,6 @@
 'use strict';
 const catModel = require('../models/catModel');
+const { validationResult } = require('express-validator');
 
 const cat_list_get = async (req, res) => {
   const cats = await catModel.getAllCats();
@@ -12,15 +13,21 @@ const cat_get = async (req, res) => {
 };
 
 const cat_create_post = async (req, res) => {
-  const params = [
-    req.body.name,
-    req.body.age,
-    req.body.weight,
-    req.body.owner,
-    req.file.filename,
-  ];
-  const result = await catModel.addCat(params);
-  await res.json(result);
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    res.send(errors.array());
+    console.log(errors);
+  } else {
+    const params = [
+      req.body.name,
+      req.body.age,
+      req.body.weight,
+      req.body.owner,
+      req.file.filename,
+    ];
+    const result = await catModel.addCat(params);
+    await res.json(result);
+  }
 };
 
 const cat_update_put = async (req, res) => {

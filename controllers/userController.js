@@ -1,5 +1,6 @@
 'use strict';
 const userModel = require('../models/userModel');
+const { validationResult } = require('express-validator');
 
 const user_list_get = async (req, res) => {
   const users = await userModel.getAllusers();
@@ -12,13 +13,18 @@ const user_get = async (req, res) => {
 };
 
 const user_create_post = async (req, res) => {
-  const params = [
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    res.send(errors.array());
+  } else {
+    const params = [
       req.body.name,
       req.body.email,
       req.body.passwd,
-  ];
-  const result = await userModel.addUser(params);
-  await res.json(result);
+    ];
+    const result = await userModel.addUser(params);
+    await res.json(result);
+  }
 };
 
 module.exports = {
