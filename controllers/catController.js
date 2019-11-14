@@ -35,9 +35,17 @@ const cat_update_put = async (req, res) => {
   await res.json(result);
 };
 
+const cat_delete = async (req, res) => {
+  const params = [req.params.id];
+  console.log('delete', params);
+  const cat = await catModel.deleteCat(params);
+  await res.json(cat);
+};
+
 module.exports = {
   cat_list_get,
   cat_get,
   cat_create_post,
   cat_update_put,
+  cat_delete
 };
