@@ -7,8 +7,6 @@ const { body, sanitizeBody } = require('express-validator');
 
 router.get('/:id', userController.user_get);
 
-router.get('/', userController.user_list_get);
-
 router.post('/',
     [
       body('name', 'SAATANA!').isLength({min: 3}).trim().escape(),
