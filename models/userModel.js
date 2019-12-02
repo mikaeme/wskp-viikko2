@@ -2,9 +2,9 @@
 const pool = require('../database/db');
 const promisePool = pool.promise();
 
-const getAllusers = async () => {
+const getAllUsers = async () => {
   try {
-    const [rows] = await promisePool.query('SELECT * FROM wop_user;');
+    const [rows] = await promisePool.execute('SELECT * FROM wop_user;');
     return rows;
   } catch (e) {
     console.log('error', e.message);
@@ -22,10 +22,10 @@ const getUser = async (id) => {
   }
 };
 
-const addUser = async(params) => {
-  try{
+const addUser = async (params) => {
+  try {
     const [rows] = await promisePool.execute(
-        'INSERT INTO wop_user(name, email, password) VALUES (?,?,?);',
+        'INSERT INTO wop_user (name, email, password) VALUES ( ?, ?, ?);',
         params);
     return rows;
   } catch (e) {
@@ -37,18 +37,16 @@ const getUserLogin = async (params) => {
   try {
     console.log(params);
     const [rows] = await promisePool.execute(
-        'SELECT user_id, name, email FROM wop_user WHERE email = ?;',
+        'SELECT * FROM wop_user WHERE email = ?;',
         params);
     return rows;
   } catch (e) {
     console.log('error', e.message);
   }
 };
-
 module.exports = {
-  getAllusers,
+  getAllUsers,
   getUser,
   addUser,
   getUserLogin,
 };
-
